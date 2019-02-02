@@ -1,12 +1,15 @@
 FROM nginx:1.15.3-alpine
 
+ENV ID_VERSION=71fa64b
+LABEL VERSION=$ID_VERSION
+
 RUN apk add --no-cache git
 
 RUN git clone -q https://github.com/occrp/id-frontend.git /app
 
 WORKDIR /app
 
-RUN git reset --hard f9bd162
+RUN git reset --hard $ID_VERSION
 COPY index.html /app/dist/index.html
 COPY english.html /app/dist/english.html
 COPY id.html /app/dist/id.html
